@@ -5,7 +5,7 @@ FROM node:14.14.0-alpine
 WORKDIR /app
 
 # Copy package.json and yarn.lock to leverage Docker cache
-COPY package.json ./
+COPY package.json yarn.lock ./
 
 # Install dependencies
 RUN yarn install
