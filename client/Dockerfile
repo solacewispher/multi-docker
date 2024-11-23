@@ -1,11 +1,11 @@
-FROM node:16-alpine as builder
-WORKDIR '/app'
+FROM node:18-alpine AS builder
+WORKDIR /app
 COPY ./package.json yarn.lock ./
 RUN yarn install
 COPY . .
 RUN yarn build
 
-FROM nginx
+FROM nginx:latest AS stage-1
 EXPOSE 5173
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
