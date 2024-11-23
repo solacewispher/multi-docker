@@ -1,0 +1,19 @@
+# Use the official Node.js image
+FROM node:lts-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and yarn.lock to leverage Docker cache
+COPY package.json ./
+
+# Install dependencies
+RUN yarn install
+
+# Copy the rest of the application code
+COPY . .
+
+# Start the application
+CMD ["yarn", "dev"]
+
+# docker run -it -p 8000:5173 -v /app/node_modules -v ~/frontend-yarn-vite:/app solace:frontend
