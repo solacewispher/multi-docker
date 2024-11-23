@@ -4,6 +4,9 @@ services:
     image: "sayandafadar/multi-client"
     mem_limit: 128m
     hostname: client
+    environment:
+      - WDS_SOCKET_PORT=0
+
   server:
     image: "sayandafadar/multi-server"
     mem_limit: 128m
@@ -16,6 +19,7 @@ services:
       - PGDATABASE=$PGDATABASE
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
+
   worker:
     image: "sayandafadar/multi-worker"
     mem_limit: 128m
@@ -29,3 +33,6 @@ services:
     hostname: nginx
     ports:
       - "80:80"
+    depends_on:
+      - api
+      - client
