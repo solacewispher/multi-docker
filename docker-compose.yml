@@ -4,8 +4,6 @@ services:
     image: "sayandafadar/multi-client"
     mem_limit: 128m
     hostname: client
-    environment:
-      - WDS_SOCKET_PORT=0
 
   server:
     image: "sayandafadar/multi-server"
